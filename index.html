@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GRIN - Creator Management Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a0a;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px) scale(1.01);
+        }
+        .gradient-border {
+            position: relative;
+            border: 1px solid transparent;
+            background: linear-gradient(45deg, #6366F1, #4F46E5) border-box;
+            -webkit-mask:
+                linear-gradient(#fff 0 0) padding-box, 
+                linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .testimonial-card {
+            background: linear-gradient(45deg, rgba(99, 102, 241, 0.1), rgba(79, 70, 229, 0.1));
+        }
+        .pricing-card {
+            background: linear-gradient(45deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+        }
+        .nav-dropdown {
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+        .nav-item:hover .nav-dropdown {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+    </style>
+</head>
+<body class="text-white">
+    <!-- Top Banner -->
+    <div class="bg-indigo-600 text-white py-2 px-4 text-center relative overflow-hidden">
+        <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAxOGMzLjMxIDAgNiAyLjY5IDYgNnMtMi42OSA2LTYgNi02LTIuNjktNi02IDIuNjktNiA2LTZ6bTEyIDEyYzMuMzEgMCA2IDIuNjkgNiA2cy0yLjY5IDYtNiA2LTYtMi42OS02LTYgMi42OS02IDYtNnptLTI0IDBjMy4zMSAwIDYgMi42OSA2IDZzLTIuNjkgNi02IDYtNi0yLjY5LTYtNiAyLjY5LTYgNi02eiIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjIiLz48L2c+PC9zdmc+')] opacity-10"></div>
+        <p class="text-sm font-medium">
+            🎉 New: GRIN launches AI-powered creator discovery! 
+            <a href="#" class="underline hover:text-white/90 ml-2">Learn more →</a>
+        </p>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-4 left-1/2 -translate-x-1/2 py-4 px-8 flex justify-between items-center bg-black/40 backdrop-blur-xl rounded-full border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.4)] w-[90%] max-w-7xl z-50">
+        <!-- Logo -->
+        <div class="flex items-center">
+            <div class="hover:scale-105 transition-all duration-500">
+                <svg class="h-8 w-auto" viewBox="0 0 40 40" fill="none">
+                    <path d="M20 8L32 32H8L20 8Z" fill="white" class="animate-pulse"/>
+                    <circle cx="20" cy="20" r="16" stroke="white" stroke-width="2" stroke-dasharray="4 4" class="animate-spin"/>
+                </svg>
+            </div>
+            <span class="ml-2 text-xl font-bold">GRIN</span>
+        </div>
+
+        <!-- Desktop Menu -->
+        <div class="hidden lg:flex items-center space-x-8">
+            <div class="nav-item relative group">
+                <button class="flex items-center space-x-1 text-white/80 hover:text-white">
+                    <span>Platform</span>
+                    <i class="fas fa-chevron-down text-xs"></i>
+                </button>
+                <div class="nav-dropdown absolute top-full left-0 mt-2 w-64 bg-black/90 backdrop-blur-xl rounded-xl border border-white/10 p-4">
+                    <a href="#" class="block px-4 py-2 hover:bg-white/10 rounded-lg">
+                        <div class="font-medium">Creator Discovery</div>
+                        <div class="text-sm text-white/70">Find perfect creators for your brand</div>
+                    </a>
+                    <a href="#" class="block px-4 py-2 hover:bg-white/10 rounded-lg mt-2">
+                        <div class="font-medium">Campaign Management</div>
+                        <div class="text-sm text-white/70">Run and track campaigns efficiently</div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="nav-item relative group">
+                <button class="flex items-center space-x-1 text-white/80 hover:text-white">
+                    <span>Solutions</span>
+                    <i class="fas fa-chevron-down text-xs"></i>
+                </button>
+                <div class="nav-dropdown absolute top-full left-0 mt-2 w-64 bg-black/90 backdrop-blur-xl rounded-xl border border-white/10 p-4">
+                    <a href="#" class="block px-4 py-2 hover:bg-white/10 rounded-lg">
+                        <div class="font-medium">For Enterprises</div>
+                        <div class="text-sm text-white/70">Scale your creator program</div>
+                    </a>
+                    <a href="#" class="block px-4 py-2 hover:bg-white/10 rounded-lg mt-2">
+                        <div class="font-medium">For Startups</div>
+                        <div class="text-sm text-white/70">Launch your creator strategy</div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="nav-item relative group">
+                <button class="flex items-center space-x-1 text-white/80 hover:text-white">
+                    <span>Resources</span>
+                    <i class="fas fa-chevron-down text-xs"></i>
+                </button>
+                <div class="nav-dropdown absolute top-full left-0 mt-2 w-64 bg-black/90 backdrop-blur-xl rounded-xl border border-white/10 p-4">
+                    <a href="#" class="block px-4 py-2 hover:bg-white/10 rounded-lg">
+                        <div class="font-medium">Blog</div>
+                        <div class="text-sm text-white/70">Latest insights and tips</div>
+                    </a>
+                    <a href="#" class="block px-4 py-2 hover:bg-white/10 rounded-lg mt-2">
+                        <div class="font-medium">Case Studies</div>
+                        <div class="text-sm text-white/70">Customer success stories</div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="nav-item relative group">
+                <button class="flex items-center space-x-1 text-white/80 hover:text-white">
+                    <span>Company</span>
+                    <i class="fas fa-chevron-down text-xs"></i>
+                </button>
+                <div class="nav-dropdown absolute top-full left-0 mt-2 w-64 bg-black/90 backdrop-blur-xl rounded-xl border border-white/10 p-4">
+                    <a href="#" class="block px-4 py-2 hover:bg-white/10 rounded-lg">
+                        <div class="font-medium">About Us</div>
+                        <div class="text-sm text-white/70">Our story and mission</div>
+                    </a>
+                    <a href="#" class="block px-4 py-2 hover:bg-white/10 rounded-lg mt-2">
+                        <div class="font-medium">Careers</div>
+                        <div class="text-sm text-white/70">Join our team</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="hidden lg:flex items-center space-x-4">
+            <a href="#" class="text-white/90 hover:text-white px-4 py-2">Login</a>
+            <a href="#" class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-full transition-all duration-300 hover:scale-105">
+                Get Started
+            </a>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button class="lg:hidden text-white">
+            <i class="fas fa-bars text-2xl"></i>
+        </button>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 px-6">
+        <div class="max-w-6xl mx-auto text-center">
+            <h1 class="text-5xl md:text-7xl font-bold mb-8 leading-tight">
+                Scale your creator <br>program with <span class="text-indigo-500">GRIN</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-white/80 mb-12 max-w-3xl mx-auto">
+                The all-in-one creator management platform trusted by the world's most innovative brands
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#" class="w-full sm:w-auto bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-4 rounded-full text-lg font-medium transition-all duration-300 hover:scale-105">
+                    Request Demo
+                </a>
+                <a href="#" class="w-full sm:w-auto bg-white/10 hover:bg-white/20 text-white px-8 py-4 rounded-full text-lg font-medium transition-all duration-300">
+                    Watch Video <i class="fas fa-play ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-20 px-6 bg-gradient-to-b from-black/50 to-transparent">
+        <div class="max-w-6xl mx-auto">
+            <div class="stats-grid">
+                <div class="text-center">
+                    <div class="text-4xl font-bold mb-2 text-indigo-500">50M+</div>
+                    <div class="text-white/70">Creators in database</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl font-bold mb-2 text-indigo-500">$500M+</div>
+                    <div class="text-white/70">Creator payments processed</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl font-bold mb-2 text-indigo-500">1000+</div>
+                    <div class="text-white/70">Brands using GRIN</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl font-bold mb-2 text-indigo-500">98%</div>
+                    <div class="text-white/70">Customer satisfaction</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-20 px-6">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-16">Everything you need to succeed with creators</h2>
+            <div class="feature-grid">
+                <!-- Feature 1 -->
+                <div class="card-hover bg-white/5 rounded-2xl p-6">
+                    <div class="w-12 h-12 bg-indigo-600 rounded-xl flex items-center justify-center mb-4">
+                        <i class="fas fa-search text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">AI-Powered Discovery</h3>
+                    <p class="text-white/70">Find the perfect creators using advanced AI matching and filtering</p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="card-hover bg-white/5 rounded-2xl p-6">
+                    <div class="w-12 h-12 bg-indigo-600 rounded-xl flex items-center justify-center mb-4">
+                        <i class="fas fa-chart-line text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Campaign Management</h3>
+                    <p class="text-white/70">Run and track campaigns with automated workflows and reporting</p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="card-hover bg-white/5 rounded-2xl p-6">
+                    <div class="w-12 h-12 bg-indigo-600 rounded-xl flex items-center justify-center mb-4">
+                        <i class="fas fa-dollar-sign text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Payments & Contracts</h3>
+                    <p class="text-white/70">Streamline creator payments and contract management</p>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="card-hover bg-white/5 rounded-2xl p-6">
+                    <div class="w-12 h-12 bg-indigo-600 rounded-xl flex items-center justify-center mb-4">
+                        <i class="fas fa-chart-pie text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Analytics & ROI</h3>
+                    <p class="text-white/70">Track performance and measure campaign success with detailed analytics</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-20 px-6 bg-gradient-to-b from-black/50 to-transparent">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-16">Trusted by leading brands</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card rounded-2xl p-8">
+                    <div class="flex items-center mb-6">
+                        <img src="https://randomuser.me/api/portraits/women/1.jpg" alt="Sarah Johnson" class="w-12 h-12 rounded-full">
+                        <div class="ml-4">
+                            <div class="font-semibold">Sarah Johnson</div>
+                            <div class="text-white/70">Marketing Director, Fashion Brand</div>
+                        </div>
+                    </div>
+                    <p class="text-white/90">"GRIN has transformed how we manage our creator relationships. The platform is intuitive and the support team is exceptional."</p>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card rounded-2xl p-8">
+                    <div class="flex items-center mb-6">
+                        <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="Michael Chen" class="w-12 h-12 rounded-full">
+                        <div class="ml-4">
+                            <div class="font-semibold">Michael Chen</div>
+                            <div class="text-white/70">CEO, Tech Startup</div>
+                        </div>
+                    </div>
+                    <p class="text-white/90">"The ROI tracking and analytics features have been game-changing for our creator program. Highly recommended!"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="py-20 px-6">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-16">Simple, transparent pricing</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Starter Plan -->
+                <div class="pricing-card rounded-2xl p-8 border border-white/10">
+                    <div class="text-xl font-semibold mb-4">Starter</div>
+                    <div class="text-4xl font-bold mb-6">$299<span class="text-lg font-normal text-white/70">/mo</span></div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Up to 50 creators</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Basic analytics</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Email support</span>
+                        </li>
+                    </ul>
+                    <a href="#" class="block text-center bg-white/10 hover:bg-white/20 text-white px-6 py-3 rounded-xl transition-all duration-300">
+                        Get Started
+                    </a>
+                </div>
+
+                <!-- Pro Plan -->
+                <div class="pricing-card rounded-2xl p-8 border border-indigo-500 relative">
+                    <div class="absolute top-0 right-0 bg-indigo-500 text-white text-sm px-4 py-1 rounded-bl-xl rounded-tr-xl">
+                        Popular
+                    </div>
+                    <div class="text-xl font-semibold mb-4">Pro</div>
+                    <div class="text-4xl font-bold mb-6">$599<span class="text-lg font-normal text-white/70">/mo</span></div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Up to 200 creators</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Advanced analytics</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Priority support</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Custom contracts</span>
+                        </li>
+                    </ul>
+                    <a href="#" class="block text-center bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-xl transition-all duration-300">
+                        Get Started
+                    </a>
+                </div>
+
+                <!-- Enterprise Plan -->
+                <div class="pricing-card rounded-2xl p-8 border border-white/10">
+                    <div class="text-xl font-semibold mb-4">Enterprise</div>
+                    <div class="text-4xl font-bold mb-6">Custom</div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Unlimited creators</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Custom features</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>24/7 support</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Dedicated manager</span>
+                        </li>
+                    </ul>
+                    <a href="#" class="block text-center bg-white/10 hover:bg-white/20 text-white px-6 py-3 rounded-xl transition-all duration-300">
+                        Contact Sales
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 px-6">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-4xl font-bold mb-8">Ready to scale your creator program?</h2>
+            <p class="text-xl text-white/80 mb-12">Join thousands of brands using GRIN to manage their creator relationships</p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#" class="w-full sm:w-auto bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-4 rounded-full text-lg font-medium transition-all duration-300 hover:scale-105">
+                    Get Started Now
+                </a>
+                <a href="#" class="w-full sm:w-auto text-white hover:text-indigo-400 transition-colors">
+                    Schedule a Demo <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black/50 py-20 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid md:grid-cols-4 gap-12 mb-12">
+                <div>
+                    <div class="flex items-center mb-6">
+                        <svg class="h-8 w-auto" viewBox="0 0 40 40" fill="none">
+                            <path d="M20 8L32 32H8L20 8Z" fill="white"/>
+                        </svg>
+                        <span class="ml-2 text-xl font-bold">GRIN</span>
+                    </div>
+                    <p class="text-white/70">The #1 Creator Management Platform</p>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Product</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-white/70 hover:text-white">Features</a></li>
+                        <li><a href="#" class="text-white/70 hover:text-white">Pricing</a></li>
+                        <li><a href="#" class="text-white/70 hover:text-white">Security</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold mb-4">Company</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-white/70 hover:text-white">About</a></li>
+                        <li><a href="#" class="text-white/70 hover:text-white">Careers</a></li>
+                        <li><a href="#" class="text-white/70 hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold mb-4">Resources</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-white/70 hover:text-white">Blog</a></li>
+                        <li><a href="#" class="text-white/70 hover:text-white">Help Center</a></li>
+                        <li><a href="#" class="text-white/70 hover:text-white">Community</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <div class="text-white/70 mb-4 md:mb-0">© 2024 GRIN. All rights reserved.</div>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-white/70 hover:text-white"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-white/70 hover:text-white"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" class="text-white/70 hover:text-white"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Chat Widget -->
+    <div class="fixed bottom-8 right-8 bg-indigo-600 rounded-full p-4 cursor-pointer shadow-lg hover:bg-indigo-700 transition-all duration-300 hover:scale-110">
+        <i class="fas fa-comments text-2xl"></i>
+    </div>
+</body>
+</html>
